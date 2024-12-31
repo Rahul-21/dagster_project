@@ -80,13 +80,13 @@ To test the sensor, which monitors new `.csv` files in the `/data` directory:
 
 #### Option 1: Mount the Local `data/` Directory to the Docker Container
 
-```bash
+
 docker run -it -p 3000:3000 -v $(pwd)/data:/opt/dagster/app/data dagster/dagster-project
 
 ```shell
 This mounts your local data/ directory to the /opt/dagster/app/data directory in the container, allowing the sensor to monitor new .csv files and trigger the pipeline accordingly.
 
-```bash
+
 docker run -p 3000:3000 -v $(pwd)/data:/data dagster-project
 
 ```shell
@@ -105,13 +105,13 @@ docker build -t dagster-project .
 ### 1. Building the Docker Image
 This command will build the Docker image using the Dockerfile and tag it as `dagster-project`.
 
-```bash
+
 docker build -t dagster-project .
 
 ## 2. Running Dagster in Docker
 Once the Docker image is built, run the Dagster instance inside a Docker container:
 
-```bash
+
 docker run -p 3000:3000 -v $(pwd):/opt/dagster/app dagster-project
 
 # Running the Dagster Project with Docker
@@ -123,7 +123,7 @@ The following command runs the Dagster project Docker image:
 - It maps the current directory (`$(pwd)`) to `/opt/dagster/app` inside the container.
 - Exposes the Dagster UI on port 3000, accessible at [http://localhost:3000](http://localhost:3000) on your local machine.
 
-```bash
+
 docker run -it -p 3000:3000 -v $(pwd):/opt/dagster/app dagster/dagster-project
 
 
@@ -153,13 +153,13 @@ To test the sensor, which monitors new `.csv` files in the `/data` directory:
 
 #### Option 1: Mount the Local `data/` Directory to the Docker Container
 
-```bash
+
 docker run -it -p 3000:3000 -v $(pwd)/data:/opt/dagster/app/data dagster/dagster-project
 
 
 This mounts your local data/ directory to the /opt/dagster/app/data directory in the container, allowing the sensor to monitor new .csv files and trigger the pipeline accordingly.
 
-```bash
+
 docker run -p 3000:3000 -v $(pwd)/data:/data dagster-project
 
 
