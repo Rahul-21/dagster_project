@@ -60,10 +60,43 @@ Ensure you have the following installed on your machine:
 - **Docker**: Download and install Docker from [here](https://www.docker.com/get-started).
 - **Docker Compose (Optional)**: Install Docker Compose from [here](https://docs.docker.com/compose/install/).
 
-### 2. Building the Docker Image
-In the root directory of the project, build the Docker image:
+View logs and results of your pipeline executions.
+- View schedules and sensor activities.
+
+## 3. Testing the Dagster Pipeline
+
+### 3.1. Test the Pipeline Manually
+
+You can manually trigger the pipeline using the Dagster UI:
+
+1. From the Dagster UI, navigate to the **"Jobs"** section.
+2. Find and select the `covid_weather_pipeline` job.
+3. Click **"Launch Run"** to manually trigger the pipeline.
+4. Check the logs to ensure the pipeline runs successfully.
+
+### 3.2. Test the Sensor
+
+To test the sensor, which monitors new `.csv` files in the `/data` directory:
+
+#### Option 1: Mount the Local `data/` Directory to the Docker Container
 
 ```bash
+docker run -it -p 3000:3000 -v $(pwd)/data:/opt/dagster/app/data dagster/dagster-project
+
+
+This mounts your local data/ directory to the /opt/dagster/app/data directory in the container, allowing the sensor to monitor new .csv files and trigger the pipeline accordingly.
+
+```bash
+docker run -p 3000:3000 -v $(pwd)/data:/data dagster-project
+
+
+### 2\. Building the Docker Image
+
+[](https://github.com/Rahul-21/dagster_project/tree/main#2-building-the-docker-image)
+
+In the root directory of the project, build the Docker image:
+
+```shell
 docker build -t dagster-project .
 
 
@@ -229,3 +262,4 @@ dagster-project/
 └── tests/                 # (Recommended) Pytest tests for validation
 Conclusion
 This Dagster Data Pipeline project provides a flexible, reproducible framework for transforming and materializing public datasets into a PostgreSQL database. Using Docker, you can easily set up and test the pipeline, ensuring its smooth operation in a controlled environment.
+```
