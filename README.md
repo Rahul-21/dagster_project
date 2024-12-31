@@ -83,20 +83,20 @@ To test the sensor, which monitors new `.csv` files in the `/data` directory:
 
 docker run -it -p 3000:3000 -v $(pwd)/data:/opt/dagster/app/data dagster/dagster-project
 
-```shell
+
 This mounts your local data/ directory to the /opt/dagster/app/data directory in the container, allowing the sensor to monitor new .csv files and trigger the pipeline accordingly.
 
 
 docker run -p 3000:3000 -v $(pwd)/data:/data dagster-project
 
-```shell
+
 ### 2\. Building the Docker Image
 
 [](https://github.com/Rahul-21/dagster_project/tree/main#2-building-the-docker-image)
 
 In the root directory of the project, build the Docker image:
 
-```shell
+
 docker build -t dagster-project .
 
 
