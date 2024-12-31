@@ -38,11 +38,13 @@ def covid_data() -> pd.DataFrame:
 
     # Handle mixed or uncertain formats
     # Example: normalizing date formats to '%m/%d/%y'
-    covid_data['timestamp'] = covid_data['timestamp'].apply(lambda x: pd.to_datetime(x, errors='coerce', format='%m/%d/%y') if isinstance(x, str) else x)
+    covid_data['timestamp'] = covid_data['timestamp'].apply(lambda x: pd.to_datetime(x, errors='coerce') if isinstance(x, str) else x)
 
     covid_data['hour'] = covid_data['timestamp'].dt.floor('h')
 
-
+    # Standardize the date format (YYYY-MM-DD) for joining
+    covid_data['timestamp'] = covid_data['timestamp'].dt.strftime('%Y-%m-%d')
+    
     return covid_data
 
 
@@ -59,10 +61,21 @@ def weather_data() -> pd.DataFrame:
     except requests.exceptions.RequestException as e:
         raise Exception(f"Failed to fetch weather data: {e}")
     
-    # Assume the dataset has a 'date' column, clean it
-    weather_data['date'] = pd.to_datetime(weather_data['date'])
+    # Rename the 'DATE' column to 'date' if it exists
+    if 'DATE' in weather_data.columns:
+        weather_data = weather_data.rename(columns={'DATE': 'date'})
+
+    # Convert the 'date' column to datetime format, handling errors
+    weather_data['date'] = weather_data['date'].apply(lambda x: pd.to_datetime(x, errors='coerce') if isinstance(x, str) else x)
     
+    # Drop rows where 'date' could not be parsed (if needed)
+    weather_data = weather_data.dropna(subset=['date'])
+    
+    # Standardize the date format (YYYY-MM-DD) for joining
+    weather_data['date'] = weather_data['date'].dt.strftime('%Y-%m-%d')
+
     return weather_data
+
 
 
 # Asset 3: Join COVID and Weather Data
