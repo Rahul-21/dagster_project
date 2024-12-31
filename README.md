@@ -163,11 +163,17 @@ Modify the cron expression in `repo.py` to test different intervals. Ensure the 
 
 Here’s an overview of the project file structure:
 
-bash
+## dagster-project/
+- `assets.py`              # Implements the data pipeline assets
+- `repo.py`                # Defines repository, schedules, and sensors
+- `Dockerfile`             # Dockerfile for building the container
+- `docker-compose.yml`     # Docker Compose config (optional)
+- `dagster.yaml`           # Dagster instance configuration
+- `workspace.yaml`         # Configures the Dagster workspace
+- `requirements.txt`       # Lists the Python dependencies
+- `data/`                  # Directory for the monitored CSV files
+- `tests/`                 # (Recommended) Pytest tests for validation
 
-Copy code
-
-`dagster-project/ ├── assets.py              # Implements the data pipeline assets ├── repo.py                # Defines repository, schedules, and sensors ├── Dockerfile             # Dockerfile for building the container ├── docker-compose.yml     # Docker Compose config (optional) ├── dagster.yaml           # Dagster instance configuration ├── workspace.yaml         # Configures the Dagster workspace ├── requirements.txt       # Lists the Python dependencies ├── data/                  # Directory for the monitored CSV files └── tests/                 # (Recommended) Pytest tests for validation`
 
 ## Conclusion
 
