@@ -1,0 +1,8 @@
+dagster
+dagster-postgres
+dagster-aws
+dagster-webserver
+pandas
+pytest
+SQLAlchemy
+requests
